@@ -1,35 +1,69 @@
-# thermoplastic-kilnforms
-### A Morphogenetic Workflow for the Design and Fabrication of Inflatable Silicone Bladders
+# README
 
-![Kilnforming artifacts](images/exemplars/Readme.png)
+# The Kilnforms Ontology
 
-This repository is the official implementation of the DIS2023 paper [Kilnforming](TODO:LinkToACM).
+The ontology is composed of three core concepts:
 
-## Authors
-* [Nasir Rakib](https://hybridatelier.uta.edu/members/128-nasir-rakib)
-* [Cesar Torres](http://hybridatelier.uta.edu/members/1-cesar-torres)
+* Material
+* Technique
+* Form
 
-## Design Tool
-* [Online Tool](https://hybridatelier.uta.edu/apps/siloseam)
-* [Source Code](https://github.com/The-Hybrid-Atelier/siloseam/tree/master/tool)
+# Malleable Form Calculator
 
-## Characterization Files
-* [Bladder Characterization Design Files](https://www.thingiverse.com/thing:4283808)
+A Malleable Form Calculator is a command-line interface that leverages the ontology to determine compatible thermoplastics in a kiln firing. 
 
-## Videos & Instructions
-* [Kilnformoing Teaser] (https://youtu.be/c8-OeuqakU4)
+## Installation Requirement
+You need a python version 3 or higher executable to run the script.
+To install required libraries, run:
+```bash
+pip install owlready2
+pip install editdistance
+```
 
-### Textured Squeeze Bladder
-* Instructable A: [Making a Textured Squeeze Bladder](https://www.instructables.com/id/Silicone-Textured-Inflatable-Squeeze-Bulb/)
-* Design Files: [Textured Squeeze Files](https://www.thingiverse.com/thing:4399272/files)
-* Video: [Siloseam DIS 2020](https://youtu.be/wsff5mcDJCg)
+## Determining the Malleable Form of a Thermoplastic
 
-### Octopus
-* Design Files: [Octopus](http://hybridatelier.uta.edu/projects/38-siloseam)
-* Video: [Designing a Silicone Bladder](https://youtu.be/BlMqOIE3d1k)
-* Video: [Fabbing a Silicone Bladder](https://youtu.be/CAZFEzSPMgg)
+  * -h, --help            show this help message and exit
+  * -m MATERIALS [MATERIALS ...], --materials MATERIALS [MATERIALS ...]
+                        The materials to be fired.
+  * -f FIRING, --firing FIRING
+                        The firing temperature of the kiln (default: Celsius).
+  * -T TEMPERATURE_UNIT, --temperature_unit TEMPERATURE_UNIT
+                        C = Celsius, F= Fahrenheit, K=Kelvin
+  * -q QUERY, --query QUERY
+                        Query the Kilnforms Ontology
+
+### Example Queries
 
 
-## Contributing
-The material available through this repository is open-source under the MIT License. 
-We welcome contributions of community-made designs! You can either submit a pull request via Github or send us a link to your Instructables, Thingiverse, or design files to hybrid.atelier.uta@gmail.com
+How does ABS react when fired at 285ºC?
+```python
+python kilnforms.py -T C -m ABS -f 285
+```
+
+How does ABS react when fired at 285ºF?
+```python
+python kilnforms.py -F C -m ABS -f 285
+```
+
+How does a composite of ABS and PC react when fired at 285ºC?
+``` python
+python kilnforms.py -T C -m ABS PC -f 285
+```
+
+How does a composite of ABS, PC and PLA react when fired at 285ºC?
+``` python
+python kilnforms.py -T C -m ABS PC PLA -f 285
+```
+
+What thermoplastics can I use in kilnforming?
+``` python 
+python kilnforms.py -q Thermoplastic
+```
+
+What kilnforming techniques are possible?
+``` python 
+python kilnforms.py -q Technique
+```
+
+
+
